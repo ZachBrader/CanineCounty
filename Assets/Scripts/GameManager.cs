@@ -3,41 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum GameState { INTRO, MAIN_MENU, GAME }
-
-public delegate void OnStateChangeHandler();
-
-public class GameManager
+public class GameManager : MonoBehaviour
 {
-    protected GameManager() { }
-    private static GameManager instance = null;
-
-    public event OnStateChangeHandler OnStateChange;
-    public GameState gameState { get; private set; }
+    private static GameManager _instance; // Main instance of game manager
 
     public static GameManager Instance
     {
         get
         {
-            if (GameManager.instance == null)
+            if (GameManager._instance == null)
             {
-                GameManager.instance = new GameManager();
-                // DontDestroyOnLoad(GameManager.instance);
+                DontDestroyOnLoad(GameManager._instance);
+                GameManager._instance = new GameManager();
             }
-            return GameManager.instance;
+            return GameManager._instance;
         }
 
     }
 
-    public void SetGameState(GameState state)
+    private bool _GameOver = false;
+
+    private void Awake()
     {
-        this.gameState = state;
-        OnStateChange();
+        // Creates instance if not existing
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else if (_instance)
+        {
+            Destroy(gameObject);
+        }
     }
 
-    public void OnApplicationQuit()
+    private void Update()
     {
-        GameManager.instance = null;
+        // Check to end game
+        if (!_GameOver)
+        {
+            Application.Quit();
+        }
     }
 
+    public void EndGame()
+    {
+        _GameOver = true;
+
+    }
 }

@@ -5,6 +5,15 @@ TagManager:
   serializedVersion: 2
   tags:
   - Dog
+  - Laser
+  - Enemy
+  - TimeManager
+  - TimeText
+  - DateText
+  - UIManager
+  - DogInteractionMenu
+  - MainUI
+  - Bed
   layers:
   - Default
   - TransparentFX
@@ -39,6 +48,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 875690543
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

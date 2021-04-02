@@ -2,13 +2,13 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-/PlantAhead/[Ll]ibrary/
-/PlantAhead/[Tt]emp/
-/PlantAhead/[Oo]bj/
-/PlantAhead/[Bb]uild/
-/PlantAhead/[Bb]uilds/
-/PlantAhead/[Ll]ogs/
-/PlantAhead/[Mm]emoryCaptures/
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -59,10 +59,10 @@ sysinfo.txt
 crashlytics-build.properties
 
 
-PlantAhead/.idea/.idea.PlantAhead/.idea/contentModel.xml
-PlantAhead/.idea/.idea.PlantAhead/.idea/encodings.xml
-PlantAhead/.idea/.idea.PlantAhead/.idea/indexLayout.xml
-PlantAhead/.idea/.idea.PlantAhead/.idea/modules.xml
-PlantAhead/.idea/.idea.PlantAhead/.idea/projectSettingsUpdater.xml
-PlantAhead/.idea/.idea.PlantAhead/.idea/vcs.xml
-PlantAhead/.idea/.idea.PlantAhead/riderModule.iml
+.idea/.idea.PlantAhead/.idea/contentModel.xml
+.idea/.idea.PlantAhead/.idea/encodings.xml
+.idea/.idea.PlantAhead/.idea/indexLayout.xml
+.idea/.idea.PlantAhead/.idea/modules.xml
+.idea/.idea.PlantAhead/.idea/projectSettingsUpdater.xml
+.idea/.idea.PlantAhead/.idea/vcs.xml
+.idea/.idea.PlantAhead/riderModule.iml
