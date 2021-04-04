@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class DogInteractionMenu : MonoBehaviour
 {
+    // Public
+    public static bool isOpen;
+
+    // Private
     private Actions playerActions;
     private Dog dog;
-    private GameObject dogInteractionMenuParent;
-    private GameObject dogInteractionMenu;
+    private GameObject dogInteractionMenuController;
 
     private UIManager uiManager;
 
@@ -15,17 +18,40 @@ public class DogInteractionMenu : MonoBehaviour
     void Start()
     {
         playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<Actions>();
-
-        dogInteractionMenu = this.transform.parent.gameObject;
-        dogInteractionMenuParent = GameObject.FindGameObjectWithTag("DogInteractionMenu");
-        //timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
+
+        dogInteractionMenuController = transform.Find("DogInteractionMenuControl").gameObject;
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void PetDog()
+    {
+        Debug.Log("Petting dog");
+        Debug.Log(dog);
+        if (dog != null)
+        {
+            playerActions.PetDog();
+        }
+    }
+
+    public void ActivateDogInteractionMenu()
+    {
+        isOpen = true;
+        Debug.Log("Turning on dog menu");
+        dogInteractionMenuController.SetActive(true);
+        OnOpen();
+    }
+
+    public void DeactivateDogInteractionMenu()
+    {
+        isOpen = false;
+        Debug.Log("Turning off dog menu");
+        dogInteractionMenuController.SetActive(false);
     }
 
     public void OnOpen()
@@ -38,16 +64,6 @@ public class DogInteractionMenu : MonoBehaviour
         dog = playerActions.getSelectedDog();
         if (dog == null)
         {
-        }
-    }
-
-    public void PetDog()
-    {
-        Debug.Log("Petting dog");
-        Debug.Log(dog);
-        if (dog != null)
-        {
-            playerActions.PetDog();
         }
     }
 }
