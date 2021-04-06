@@ -19,19 +19,23 @@ public class ShelterFrontend : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        shelterBackend = transform.parent.Find("ShelterBackend").GetComponent<ShelterBackend>();
-        DogKennels = transform.Find("DogKennels").gameObject;
-        Dogs = transform.Find("Dogs").gameObject;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isInstantiated)
-        {
-            InstantiateDogKennels();
-            isInstantiated = true;
-        }
+    }
+
+    public void InitializeFrontend()
+    {
+        shelterBackend = transform.parent.Find("ShelterBackend").GetComponent<ShelterBackend>();
+        DogKennels = transform.Find("DogKennels").gameObject;
+        Dogs = transform.Find("Dogs").gameObject;
+
+        InstantiateDogKennels();
+
+        RefreshDogs();
     }
 
     void InstantiateDogKennels()
@@ -44,13 +48,20 @@ public class ShelterFrontend : MonoBehaviour
             newKennel.transform.SetParent(DogKennels.transform);
             newKennel.GetComponent<SpriteRenderer>().sortingLayerName = "Setting";
         }
+    }
 
+    public void RefreshDogs()
+    {
+        DogScript[] dogs = shelterBackend.getDogsInShelter();
         for (int i = 0; i < shelterBackend.getNumDogs(); i++)
         {
             Debug.Log("Making new dog");
             GameObject newDog = Instantiate(dogPrefab, new Vector3(startingLocation.x + i * 2, startingLocation.y, 0), Quaternion.identity);
+            newDog.GetComponent<Dog>().SetName(dogs[i].name);
             newDog.transform.SetParent(Dogs.transform);
             // newDog.GetComponent<SpriteRenderer>().sortingLayerName;
         }
     }
+
+
 }

@@ -17,6 +17,8 @@ public class UIManager : MonoBehaviour
     private MainUI mainUI;
     private PauseMenu pauseMenu;
 
+    private AdoptDogOption adoptDogOption;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class UIManager : MonoBehaviour
         dogInteractionMenu = GameObject.FindGameObjectWithTag("DogInteractionMenu").GetComponent<DogInteractionMenu>();
         mainUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUI>();
         pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenu>();
+
+        adoptDogOption = GameObject.FindGameObjectWithTag("AdoptDogOption").GetComponent<AdoptDogOption>();
 
         InitializeMenus();
     }
@@ -43,6 +47,7 @@ public class UIManager : MonoBehaviour
     // Using this to handle menus at beginning so not all are open at the same time
     public void InitializeMenus()
     {
+        adoptDogOption.Close();
         pauseMenu.DeactivatePauseMenu();
         dogInteractionMenu.DeactivateDogInteractionMenu();
         curMenu = "mainUI";
@@ -77,6 +82,10 @@ public class UIManager : MonoBehaviour
                 menuOpen = false;
                 pauseMenu.DeactivatePauseMenu();
                 break;
+            case "adoptDogOption":
+                menuOpen = false;
+                adoptDogOption.Close();
+                break;
             default:
                 break;
         }
@@ -98,6 +107,10 @@ public class UIManager : MonoBehaviour
             case "pauseMenu":
                 menuOpen = true;
                 pauseMenu.ActivatePauseMenu();
+                break;
+            case "adoptDogOption":
+                menuOpen = true;
+                adoptDogOption.Open();
                 break;
             default:
                 Debug.LogError("Could not swap to menu: " + curMenu);

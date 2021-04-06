@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShelterBackend : MonoBehaviour
 {
     // Public
-    public static Dog[] dogsInShelter;
+    public static DogScript[] dogsInShelter;
 
     // Private
     private int numDogs;
@@ -14,25 +14,30 @@ public class ShelterBackend : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        numDogs = 0;
-        MAX_DOGS = 5;
-        dogsInShelter = new Dog[MAX_DOGS];
-
-        for (int i = 0; i < MAX_DOGS; i++)
-        {
-            Dog newDog = new Dog();
-            newDog.SetName(i.ToString());
-
-            AddDogToShelter(newDog);
-        }
-
-        Debug.Log("Shelter has " + numDogs.ToString() + " in shelter");
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void InitializeBackend()
+    {
+        numDogs = 0;
+        MAX_DOGS = 5;
+        dogsInShelter = new DogScript[MAX_DOGS];
+
+        /*for (int i = 0; i < MAX_DOGS; i++)
+        {
+            Dog newDog = new Dog();
+            newDog.SetName(i.ToString());
+
+            AddDogToShelter(newDog);
+        }*/
+
+        Debug.Log("Shelter has " + numDogs.ToString() + " in shelter");
     }
 
     public int getNumDogs()
@@ -45,12 +50,12 @@ public class ShelterBackend : MonoBehaviour
         return MAX_DOGS;
     }
 
-    public Dog[] getDogsInShelter()
+    public DogScript[] getDogsInShelter()
     {
         return dogsInShelter;
     }
 
-    public bool AddDogToShelter(Dog nDog)
+    public bool AddDogToShelter(DogScript nDog)
     {
         if (numDogs < MAX_DOGS)
         {
@@ -69,7 +74,7 @@ public class ShelterBackend : MonoBehaviour
         return false;
     }
 
-    public bool RemoveDogFromShelter(Dog nDog)
+    public bool RemoveDogFromShelter(DogScript nDog)
     {
         if (numDogs > 0)
         {

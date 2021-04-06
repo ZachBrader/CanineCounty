@@ -13,9 +13,13 @@ public class TimeManager : MonoBehaviour
     private float timeUsed = 0; // Amount of time player used up 
     private GameManager gameManager;
 
+    private Events inGameEvents;
+
     public void Start()
     {
         gameManager = GameManager.Instance;
+
+        inGameEvents = GetComponent<Events>();
     }
 
     public void Update()
@@ -52,6 +56,8 @@ public class TimeManager : MonoBehaviour
         curDay++;
         timeUsed = 0; // Reset time used
         totalTime = timeForDay; // Set next days date
+
+        inGameEvents.SpawnStrayDogs();
     }
 
     // Returns current day for player

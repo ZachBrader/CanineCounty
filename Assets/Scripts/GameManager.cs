@@ -48,6 +48,6 @@ public class GameManager : MonoBehaviour
     public void EndGame()
     {
         _GameOver = true;
-
     }
+
 }
