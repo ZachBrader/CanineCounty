@@ -24,16 +24,33 @@ public class TimeManager : MonoBehaviour
 
     public void Update()
     {
-        /*if (timeUsed >= totalTime)
-        {
-            startNewDay();
-        }*/
     }
 
     // Returns time used for player
     public float getTimeUsed()
     {
         return timeUsed;
+    }
+
+    // Returns Current In Game Time
+    public string getInGameTime()
+    {
+        float timeUsed = getTimeUsed();
+
+        bool isMorning = timeUsed < 3;
+
+        //  Initalizes clock in time at 9:00
+        string time = "";
+        if (isMorning)
+        {
+            time = ((int)(timeUsed + 9)).ToString() + ":" + "00" + " AM";
+        }
+        else
+        {
+            time = ((int)(timeUsed - 3)).ToString() + ":" + "00" + " PM";
+        }
+
+        return time;
     }
 
     // Keeps track of players using time

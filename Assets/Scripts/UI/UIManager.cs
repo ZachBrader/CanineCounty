@@ -47,6 +47,10 @@ public class UIManager : MonoBehaviour
     // Using this to handle menus at beginning so not all are open at the same time
     public void InitializeMenus()
     {
+        // Call Menu Start Functions
+        adoptDogOption.Initialize();
+
+        // Close all unrelevant menus
         adoptDogOption.Close();
         pauseMenu.DeactivatePauseMenu();
         dogInteractionMenu.DeactivateDogInteractionMenu();

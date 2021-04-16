@@ -35,7 +35,8 @@ public class MainUI : MonoBehaviour
     {
         if (mainUIController.activeSelf)
         {
-            timeText.text = timeManager.getTimeUsed().ToString() + " hours / " + timeManager.totalTime.ToString() + " hours";
+            //timeText.text = timeManager.getTimeUsed().ToString() + " hours / " + timeManager.totalTime.ToString() + " hours";
+            timeText.text = timeManager.getInGameTime();
             dateText.text = "Day " + timeManager.getDate().ToString() + " of " + timeManager.getFinalDate().ToString() + " days";
         }
     }

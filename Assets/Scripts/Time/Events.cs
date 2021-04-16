@@ -7,19 +7,37 @@ public class Events : MonoBehaviour
     // Private
     private ShelterManager shelter;
     private ShelterBackend shelterBackend;
+
+    private Actions playerActions;
     
 
     // Start is called before the first frame update
     void Start()
     {
         shelter = GameObject.FindGameObjectWithTag("Shelter").GetComponent<ShelterManager>();
-        shelterBackend = GameObject.FindGameObjectWithTag("ShelterBackend").GetComponent<ShelterBackend>();
+        shelterBackend = GameObject.FindGameObjectWithTag("Shelter").transform.Find("ShelterBackend").GetComponent<ShelterBackend>();
+        playerActions = GameObject.FindGameObjectWithTag("Player").GetComponent<Actions>();
     }
 
     // Update is called once per frame
     void Update()
     {
         
+    }
+
+    public void UpdateEventsBasedOnTimeUsed(float timeUsed)
+    {
+        if (timeUsed >= 2 && timeUsed < 3)
+        {
+            SpawnStrayDogs();
+        }
+
+        if (timeUsed >= 10)
+        {
+            playerActions.EnableSleep();
+        }
+
+
     }
 
     public void SpawnStrayDogs()

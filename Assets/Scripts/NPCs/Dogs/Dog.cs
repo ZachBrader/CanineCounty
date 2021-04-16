@@ -5,8 +5,18 @@ using UnityEngine;
 public class Dog : MonoBehaviour
 {
     // PUBLIC
-    public float Joy = 0.5f;
-    public float Hygiene = 0.5f;
+    public float Health = .5f; // Quality of dog over time
+    public float Joy = 0.5f; // How Happy
+    public float Hygiene = 0.5f; // How Clean
+    // How Hydrated
+    // How Hungry
+
+    // Training Factors:
+    // Personality Type
+    // Time Invested
+    // Average Dog Health
+    
+    // Training
 
     // PRIVATE
     private string dogName;
