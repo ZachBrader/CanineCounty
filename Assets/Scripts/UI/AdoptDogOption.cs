@@ -16,12 +16,12 @@ public class AdoptDogOption : MonoBehaviour
 
     private int numDogsToAdopt = 0;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Initialize()
     {
         uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         shelter = GameObject.FindGameObjectWithTag("Shelter").GetComponent<ShelterManager>();
         adoptDogController = transform.Find("AdoptDogControl").gameObject;
+        Debug.Log(adoptDogController);
 
         dogsToAdoptText = adoptDogController.transform.Find("DogsToAdoptText").GetComponent<Text>();
         Debug.Log(dogsToAdoptText);

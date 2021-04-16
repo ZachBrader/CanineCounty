@@ -46,6 +46,7 @@ public class Actions : MonoBehaviour
     private void ResetDay()
     {
         timeManager.startNewDay();
+        DisableSleep();
     }
 
     #endregion
@@ -60,6 +61,16 @@ public class Actions : MonoBehaviour
 
             Debug.Log("Pet the dog");
         }
+    }
+
+    public void EnableSleep()
+    {
+        canSleep = true;
+    }
+
+    public void DisableSleep()
+    {
+        canSleep = false;
     }
     #endregion
 

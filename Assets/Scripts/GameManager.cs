@@ -5,8 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    // Singleton
     private static GameManager _instance; // Main instance of game manager
 
+    // Private
+    private TimeManager timeManager;
+
+    // Public
     public static GameManager Instance
     {
         get
@@ -34,6 +39,11 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void InstantiateGame()
+    {
+        
     }
 
     private void Update()
