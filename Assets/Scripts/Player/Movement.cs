@@ -16,16 +16,22 @@ public class Movement : MonoBehaviour
     private float _Vertical;
     private Rigidbody2D _RigidBody;
 
+    private UIManager uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
+        uiManager = GameObject.FindGameObjectWithTag("UIManager").GetComponent<UIManager>();
         _RigidBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Move();
+        if (!uiManager.GetMenuOpen())
+        {
+            Move();
+        }
     }
 
 

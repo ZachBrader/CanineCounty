@@ -14,6 +14,9 @@ TagManager:
   - DogInteractionMenu
   - MainUI
   - Bed
+  - PauseMenu
+  - Shelter
+  - AdoptDogOption
   layers:
   - Default
   - TransparentFX
@@ -50,6 +53,9 @@ TagManager:
   m_SortingLayers:
   - name: Background
     uniqueID: 875690543
+    locked: 0
+  - name: Setting
+    uniqueID: 2971578119
     locked: 0
   - name: Default
     uniqueID: 0

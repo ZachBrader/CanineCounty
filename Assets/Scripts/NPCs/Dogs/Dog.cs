@@ -9,6 +9,7 @@ public class Dog : MonoBehaviour
     public float Hygiene = 0.5f;
 
     // PRIVATE
+    private string dogName;
     private DogBreed _DogBreed;
 
 
@@ -29,4 +30,7 @@ public class Dog : MonoBehaviour
 
     float GetHygiene() { return Hygiene; }
     void SetHygiene(float nHygiene) { this.Hygiene = nHygiene; }
+
+    public string GetName() { return dogName; }
+    public void SetName(string nDogName) { this.dogName = nDogName; }
 }

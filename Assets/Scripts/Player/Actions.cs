@@ -22,14 +22,22 @@ public class Actions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Matched to E key
-        if (isDogSelected && Input.GetKeyDown(KeyCode.E))
+        if (!uiManager.GetMenuOpen())
         {
-            OpenDogInteractionMenu();
+            // Matched to E key
+            if (isDogSelected && Input.GetKeyDown(KeyCode.E))
+            {
+                OpenDogInteractionMenu();
+            }
+            else if (canSleep && Input.GetKeyDown(KeyCode.E))
+            {
+                ResetDay();
+            }   
         }
-        if (canSleep && Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ResetDay();
+            uiManager.SwapMenus("pauseMenu");
         }
     }
 
@@ -42,6 +50,19 @@ public class Actions : MonoBehaviour
 
     #endregion
 
+    #region Player Actions
+    public void PetDog()
+    {
+        Debug.Log("Petting dog");
+        if (isDogSelected && uiManager.GetCurMenu() == "dogInteractionMenu")
+        {
+            timeManager.SpendTime(1f);
+
+            Debug.Log("Pet the dog");
+        }
+    }
+    #endregion
+
     #region Dog Methods
     public Dog getSelectedDog()
     {
@@ -52,24 +73,15 @@ public class Actions : MonoBehaviour
         }
         return null;
     }
+    #endregion
 
-    public void PetDog()
-    {
-        Debug.Log("Petting dog");
-        if (isDogSelected)
-        {
-            timeManager.SpendTime(1f);
-
-            Debug.Log("Pet the dog");
-        }
-    }
-
+    #region Menu Handlers
     public void OpenDogInteractionMenu()
     {
         // Matched to E key
-        if (isDogSelected)
+        if (isDogSelected && uiManager.GetCurMenu() != "dogInteractionMenu")
         {
-            uiManager.ShowDogInteractionMenu();
+            uiManager.SwapMenus("dogInteractionMenu");
         }
     }
     #endregion

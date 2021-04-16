@@ -7,62 +7,125 @@ public class UIManager : MonoBehaviour
 {
     // Public
     public bool showAction = true;
+    public static bool menuOpen = false;
 
     // Private
-    private Text timeText;
-    private Text dateText;
-    private GameObject actionText; // Game Object for action text
     private TimeManager timeManager;
 
-    private GameObject curMenu;
-    private GameObject dogInteractionMenu;
-    private GameObject mainUI;
+    private string curMenu;
+    private DogInteractionMenu dogInteractionMenu;
+    private MainUI mainUI;
+    private PauseMenu pauseMenu;
+
+    private AdoptDogOption adoptDogOption;
 
     // Start is called before the first frame update
     void Start()
     {
-        timeText = GameObject.FindGameObjectWithTag("TimeText").GetComponent<Text>();
-        dateText = GameObject.FindGameObjectWithTag("DateText").GetComponent<Text>();
         timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
-        dogInteractionMenu = GameObject.FindGameObjectWithTag("DogInteractionMenu");
-        mainUI = GameObject.FindGameObjectWithTag("MainUI");
+        dogInteractionMenu = GameObject.FindGameObjectWithTag("DogInteractionMenu").GetComponent<DogInteractionMenu>();
+        mainUI = GameObject.FindGameObjectWithTag("MainUI").GetComponent<MainUI>();
+        pauseMenu = GameObject.FindGameObjectWithTag("PauseMenu").GetComponent<PauseMenu>();
 
-        ShowDogInteractionMenu();
-        ShowMainUI();
+        adoptDogOption = GameObject.FindGameObjectWithTag("AdoptDogOption").GetComponent<AdoptDogOption>();
 
+        InitializeMenus();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (mainUI.activeSelf)
+        
+    }
+
+    public string GetCurMenu()
+    {
+        return curMenu;
+    }
+
+    #region Menu Handling
+    // Using this to handle menus at beginning so not all are open at the same time
+    public void InitializeMenus()
+    {
+        adoptDogOption.Close();
+        pauseMenu.DeactivatePauseMenu();
+        dogInteractionMenu.DeactivateDogInteractionMenu();
+        curMenu = "mainUI";
+    }
+
+    public void SwapMenus(string nMenu)
+    {
+        if (curMenu == nMenu || nMenu == "")
         {
-            timeText.text = timeManager.getTimeUsed().ToString() + " hours / " + timeManager.totalTime.ToString() + " hours";
-            dateText.text = "Day " + timeManager.getDate().ToString() + " of " + timeManager.getFinalDate().ToString() + " days";
+            return;
         }
+        DeactivateOldMenu();
+
+        curMenu = nMenu;
+
+        ActivateNewMenu();
+
     }
 
-    public void ShowMainUI()
+    private void DeactivateOldMenu()
     {
-        Debug.Log("Showing main ui");
-        if (curMenu != null) { curMenu.SetActive(false); }
-        mainUI.SetActive(true);
-        curMenu = mainUI;
+        switch (curMenu)
+        {
+            case "mainUI":
+                mainUI.DeactivateMainUI();
+                break;
+            case "dogInteractionMenu":
+                menuOpen = false;
+                dogInteractionMenu.DeactivateDogInteractionMenu();
+                break;
+            case "pauseMenu":
+                menuOpen = false;
+                pauseMenu.DeactivatePauseMenu();
+                break;
+            case "adoptDogOption":
+                menuOpen = false;
+                adoptDogOption.Close();
+                break;
+            default:
+                break;
+        }
+
     }
 
-    public void ShowDogInteractionMenu()
+    private void ActivateNewMenu()
     {
-        Debug.Log("Showing dog menu");
-        if (curMenu != null) { curMenu.SetActive(false); }
-        dogInteractionMenu.SetActive(true);
-        curMenu = dogInteractionMenu;
+        switch (curMenu)
+        {
+            case "mainUI":
+                menuOpen = false;
+                mainUI.ActivateMainUI();
+                break;
+            case "dogInteractionMenu":
+                menuOpen = true;
+                dogInteractionMenu.ActivateDogInteractionMenu();
+                break;
+            case "pauseMenu":
+                menuOpen = true;
+                pauseMenu.ActivatePauseMenu();
+                break;
+            case "adoptDogOption":
+                menuOpen = true;
+                adoptDogOption.Open();
+                break;
+            default:
+                Debug.LogError("Could not swap to menu: " + curMenu);
+                break;
+        }
 
-        dogInteractionMenu.transform.parent.GetComponent<DogInteractionMenu>().OnOpen();
+    }
+    #endregion
+
+    #region Get/Set
+    public bool GetMenuOpen()
+    {
+        return menuOpen;
     }
 
-    /*public void ShowPromptForAction(string newActionText = "")
-    {
-        actionText.SetActive(true);
-        actionText.GetComponent(Text).text = newActionText;
-    }*/
+    #endregion
+
 }
